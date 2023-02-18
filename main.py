@@ -15,14 +15,14 @@ dp: Dispatcher = Dispatcher()
 @dp.message()
 async def send_answer(message: Message):
     response = openai.Completion.create(
-        model="code-davinci-002",
+        model="text-davinci-003",
         prompt=message.text,
-        temperature=0,
-        max_tokens=1000,
-        top_p=1.0,
+        temperature=0.9,
+        max_tokens=150,
+        top_p=1,
         frequency_penalty=0.0,
-        presence_penalty=0.0,
-        stop=["###"]
+        presence_penalty=0.6,
+        stop=[" Human:", " AI:"]
     )
     await message.answer(text=response['choices'][0]['text'])
 
